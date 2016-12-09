@@ -37,7 +37,6 @@ var styles = StyleSheet.create({
   },
 
   DataListToolbarWrapper:{
-    //position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
@@ -79,40 +78,41 @@ var styles = StyleSheet.create({
   },
 
   dataFormGroupWrapper: {
-    //position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
 
   dataFormGroupRowBox: {
     top: 16,
-    position: 'relative',
-    flexGrow: 1,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 10
+    paddingBottom: 15,
+    //borderWidth: 1,
+    //borderColor: '#f7423b'
   },
 
   dataFormGroupRowWrapper: {
-    //position:'absolute',
-    flexDirection:'row',
+    flexDirection: 'row',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0
+  },
+
+  dataFormGroupRowBorder: {
+    paddingTop: 20,
   },
 
   dataFormGroupColBox: {
     position:'relative',
     flexGrow: 1,
-    borderWidth: 1,
-    borderColor: '#f7423b'
+    //borderWidth: 1,
+    //borderColor: '#f7423b'
   },
 
   dataFormGroupColWrapper: {
-    //position: 'absolute',
     flexDirection: 'row',
     top: 0,
     bottom: 0,
@@ -123,25 +123,29 @@ var styles = StyleSheet.create({
   dataFormGroupLabelBox: {
     position: 'relative',
     width: 90,
-    marginRight: 6,
-    justifyContent: 'center',
-    backgroundColor: '#f7423b'
-    //alignItems: 'center',
+    marginRight: 6
   },
 
   dataFormGroupLabelWrapper: {
-    // position: 'absolute',
+    //position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    margin: 3
+    margin: 3,
+    alignItems: 'flex-end'
+  },
+
+  dataFormGroupLabel: {
+    color: 'rgba(0, 0, 0, 0.541176)',
   },
 
   dataFormGroupFieldBox: {
     position: 'relative',
     flexGrow: 1,
-    marginRight: 10
+    marginRight: 10,
+    //borderWidth: 1,
+    //borderColor: 'green'
   },
 
   dataFormGroupFieldWrapper: {
@@ -157,14 +161,10 @@ var styles = StyleSheet.create({
     height: 200,
     width: 200,
     resizeMode: 'contain',
-    //position: 'absolute',
   },
 
   dataFormImageBox: {
     margin: 1,
-    //display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 
   dataFormGroupImageBox: {
@@ -173,7 +173,6 @@ var styles = StyleSheet.create({
   },
 
   dataFormGroupImageWrapper: {
-    //position: 'absolute',
     flexDirection: 'row',
     top: 0,
     bottom: 0,

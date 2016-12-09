@@ -10,8 +10,8 @@ express()
   .get('/api/data', (req, res) => res.json(data))
   .post('/api/data', (req, res) => res.json(data = req.body))
 
-  .get('http://0.0.0.0:3000/api/Drawers', (req, res) => res.json(data))
-  .post('http://0.0.0.0:3000/api/Drawers/replaceOrCreate', (req, res) => res.json(data = req.body))
+  .get('http://0.0.0.0:3000/api/states', (req, res) => res.json(data))
+  .post('http://0.0.0.0:3000/api/states/replaceOrCreate', (req, res) => res.json(data = req.body))
 
   .get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
   .listen(3333);

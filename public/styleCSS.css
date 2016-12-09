@@ -22,7 +22,7 @@ body {
 
 .appLabel {
   font-size: 18px;
-  text-align: left;
+  text-align: center;
 }
 
 .appBoxWrapper {
@@ -62,7 +62,7 @@ body {
   right: 0;
   display: flex;
   flex-grow: 1;
-  border: 1px solid #a8a8a8;
+  /*border: 1px solid #a8a8a8;*/
 }
 
 .listItemImageBox {

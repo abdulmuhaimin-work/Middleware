@@ -16,7 +16,7 @@ let Preview = ({ state, children }) => {
     <View style={styles.previewContentBox}>
       <View style={styles.previewContentWrapper}>
         <PreviewEditorContent />
-        <PreviewScreenContent />
+        <PreviewScreenContent children={children} />
       </View>
     </View>
   )

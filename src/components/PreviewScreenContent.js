@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Image, StyleSheet, Text, View } from 'react-native';
-// Components
-const Card = ({ children }) => <View style={styles.card}>{children}</View>;
-const Title = ({ children }) => <Text style={styles.title}>{children}</Text>;
-const Photo = ({ uri }) => <Image source={{ uri }} style={styles.image} />;
+import { ScrollView, Image, StyleSheet, View } from 'react-native';
+import { Link } from 'react-router';
 // Material UI
-import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import purpleBaseTheme from 'material-ui/styles/baseThemes/purpleBaseTheme';
@@ -16,98 +12,60 @@ import greenBaseTheme from 'material-ui/styles/baseThemes/greenBaseTheme';
 import {Tabs, Tab} from 'material-ui/Tabs';
 // Styles
 import styles from '../stylePV';
+// Components
+import PreviewApplicationBar from './PreviewApplicationBar';
+import PreviewDataListAll from './PreviewDataListAll';
 
 const mapStateToProps = (state) => ({
-  resource: state.resource,
-  featured: state.resource.filter(c => c.featured == true),
-  notFeatured: state.resource.filter(c => c.featured != true),
   screen: state.previewFirstSlider,
-  theme: state.previewSecondSlider
+  theme: state.previewSecondSlider,
+  featured: state.resource.filter(c => c.featured == true),
 });
 
-const Preview = React.createClass({
-  render() {
-    let title = (
-        <span className="appLabel">
-          LollipopLab
-        </span>
+let Preview = ({ screen, theme, featured, children }) => {
+
+  var _scrollView: ScrollView;
+
+  var listImage = featured.map((item) => {
+    return (
+      <View key={item.id.toString()}>
+        <Image style={styles.previewFeaturedImage} source={item.image} />
+      </View>
     );
+  });
 
-    let resource = this.props.resource;
-    let featured = this.props.featured;
-    let notFeatured = this.props.notFeatured;
-    let screen = this.props.screen;
-    let theme = this.props.theme;
-    var _scrollView: ScrollView;
-
-    var listImage = featured.map((item) => {
-      return (
-        <View key={item.id.toString()}>
-          <Image style={styles.previewFeaturedImage} source={item.image} />
-        </View>
-      );
-    });
-
-    var listItems = notFeatured.map((item) => {
-      return (
-        <View key={item.id.toString()} style={styles.previewScreenListBox}>
-          <View style={styles.previewScreenListWrapper}>
-            <View style={styles.previewScreenListImageBox}>
-              <View style = {styles.previewScreenListImageWrapper}>
-                <Image style={styles.previewNotFeaturedImage} source={item.image} />
+  return (
+  <MuiThemeProvider muiTheme={getTheme(theme)}>
+    <View style={styles.previewScreenBox}>
+      <View style={styles.previewScreenWrapper}>
+        <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
+        scrollEventThrottle={100} horizontal={false}>
+          <View style={getScreen(screen)}>
+            <PreviewApplicationBar/>
+            <View style={styles.previewScreenFeaturedImageBox}>
+              <View style = {styles.previewScreenFeaturedImageWrapper}>
+                <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
+                scrollEventThrottle={100} horizontal={true}>
+                  {listImage}
+                </ScrollView>
               </View>
             </View>
-            <View style={styles.previewScreenListDescriptionBox}>
-              <View style={styles.previewScreenListDescriptionWrapper}>
-                <Text style={styles.previewScreenListDescriptionTitle}>
-                  {item.name}
-                </Text>
-                <Text style={styles.previewScreenListDescriptionDescription}>
-                  {item.description}
-                </Text>
+            <View style={styles.previewScreenGroupRowBox}>
+              <View style = {styles.previewScreenGroupRowWrapper}>
+                <Tabs>
+                  <Link to={`/preview/all`}><Tab label="All"/></Link>
+                  <Link to={`/preview/featured`}><Tab label="Featured"/></Link>
+                </Tabs>
+                {children}
               </View>
             </View>
           </View>
-        </View>
-      );
-    });
-
-    return (
-    <MuiThemeProvider muiTheme={getTheme(theme)}>
-      <View style={styles.previewScreenBox}>
-        <View style={styles.previewScreenWrapper}>
-          <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
-          scrollEventThrottle={100} horizontal={false}>
-            <View style={getScreen(screen)}>
-              <AppBar title={title}/>
-              <View style={styles.previewScreenFeaturedImageBox}>
-                <View style = {styles.previewScreenFeaturedImageWrapper}>
-                  <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
-                  scrollEventThrottle={100} horizontal={true}>
-                    {listImage}
-                  </ScrollView>
-                </View>
-              </View>
-              <View style={styles.previewScreenGroupRowBox}>
-                <View style = {styles.previewScreenGroupRowWrapper}>
-                  <Tabs>
-                    <Tab label="All"/>
-                    <Tab label="Trending" />
-                  </Tabs>
-                  <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
-                  scrollEventThrottle={100} horizontal={false}>
-                    {listItems}
-                  </ScrollView>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
+        </ScrollView>
       </View>
-    </MuiThemeProvider>
-    );
-  }
-});
+    </View>
+  </MuiThemeProvider>
+  )
+}
 
 function getScreen(screen) {
   if ( screen === 'iPhone5' ) {

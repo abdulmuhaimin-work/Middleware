@@ -50,7 +50,8 @@ const DataListContent = React.createClass({
   let props = this.props;
   var listItems = props.resource.map((item) => {
     return (
-      <ListItem key={item.id.toString()} onClick={()=>{props.handleOnSelect(item.id)}}>
+    <div key={item.id.toString()}>
+      <ListItem onClick={()=>{props.handleOnSelect(item.id)}}>
         <Link to={`/content/item/${item.id.toString()}`}>
           <div className="listItemBox">
             <div className="listItemWrapper">
@@ -79,6 +80,8 @@ const DataListContent = React.createClass({
           </div>
         </Link>
       </ListItem>
+      <Divider />
+    </div>
     );
   });
 

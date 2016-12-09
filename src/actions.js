@@ -18,18 +18,19 @@ export const unsortItem = query => ({ type: 'UNSORT_ITEM_NAME' });
 //PreviewEditorContent.js
 export const handleFirstPreviewSlider = value => ({ type: 'HANDLE_FIRST_PREVIEW_SLIDER', data: value });
 export const handleSecondPreviewSlider = value => ({ type: 'HANDLE_SECOND_PREVIEW_SLIDER', data: value });
-
-export const receiveData = data => ({ type: 'RECEIVE_DATA', data: data});
-export const receiveDrawerData = data => ({ type: 'RECEIVE_DRAWER_DATA', data: data});
-
+//Express,LoopBack
+export const receiveStateData = data => ({ type: 'RECEIVE_STATE_DATA', data: data});
 export const fetchData = () => {
   return dispatch => {
-    fetch('/api/data')
-      .then(res => res.json())
-      .then(json => dispatch(receiveData(json)));
+    //fetch('/api/data')
+      //.then(res => res.json())
+      //.then(json => dispatch(receiveData(json)));
       //.catch(err => dispatch(failedRequest(err)));
-    fetch('http://0.0.0.0:3000/api/Drawers')
+    fetch('http://0.0.0.0:3000/api/states')
       .then(res => res.json())
-      .then(json => dispatch(receiveDrawerData(json)));
+      .then(json => dispatch(receiveStateData(json)))
   };
 };
+//PreviewScreenContent.js
+export const previewToggleDrawer = () => ({ type: 'PREVIEW_TOGGLE_DRAWER' });
+export const previewCloseDrawer = () => ({ type: 'PREVIEW_CLOSE_DRAWER' });

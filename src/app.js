@@ -22,6 +22,8 @@ import UpdateItemModal from './components/UpdateItemModal';
 import DeleteItemModal from './components/DeleteItemModal';
 import Content from './components/Content';
 import Preview from './components/Preview';
+import PreviewDataListAll from './components/PreviewDataListAll';
+import PreviewDataListFeatured from './components/PreviewDataListFeatured';
 
 // Simulate Tapping
 injectTapEventPlugin();
@@ -36,7 +38,10 @@ const routes = (
         <Route path='/content/item/:itemId/delete' component={DeleteItemModal} />
       </Route>
     </Route>
-    <Route path='/preview' component={Preview} />
+    <Route path='/preview' component={Preview}>
+      <Route path='/preview/all' component={PreviewDataListAll} />
+      <Route path='/preview/featured' component={PreviewDataListFeatured} />
+    </Route>
   </Route>
 );
 
@@ -64,6 +69,7 @@ function run() {
 function save() {
   var state = store.getState();
 
+  /*
   fetch('/api/data', {
     method: 'POST',
     headers: {
@@ -72,13 +78,15 @@ function save() {
     },
     body: JSON.stringify({
       drawer: state.drawer,
-      item: state.item,
+      navigation: state.navigation,
       resource: state.resource,
-      navigation: state.navigation
+      item: state.item
     })
   });
+  */
 
-  fetch('http://0.0.0.0:3000/api/Drawers/replaceOrCreate', {
+  // Saving to LoopBack
+  fetch('http://0.0.0.0:3000/api/states/replaceOrCreate', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -86,6 +94,9 @@ function save() {
     },
     body: JSON.stringify({
       drawer: state.drawer,
+      navigation: state.navigation,
+      resource: state.resource,
+      item: state.item,
       id: '0000'
     })
   });

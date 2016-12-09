@@ -1,7 +1,11 @@
 export const drawer = (state, action) => {
   switch (action.type) {
-    case 'RECEIVE_DRAWER_DATA':
-      return action.data[0].drawer || false;
+    case 'RECEIVE_STATE_DATA':
+      if (action.data[0].drawer === 'true') {
+        return true
+      } else {
+        return false
+      };
     case 'TOGGLE_DRAWER':
       return true;
     case 'CLOSE_DRAWER':
@@ -13,8 +17,8 @@ export const drawer = (state, action) => {
 
 export const navigation = (state, action) => {
   switch (action.type) {
-    case 'RECEIVE_DATA':
-      return action.data.navigation || state;
+    case 'RECEIVE_STATE_DATA':
+      return action.data[0].navigation || 'home';
     case 'HOME_NAVIGATION':
       return 'home';
     case 'CONTENT_NAVIGATION':
@@ -28,8 +32,8 @@ export const navigation = (state, action) => {
 
 export const resource = (state, action) => {
   switch (action.type) {
-    case 'RECEIVE_DATA':
-      return action.data.resource || state;
+    case 'RECEIVE_STATE_DATA':
+      return action.data[0].resource || state;
     case 'ADD_ITEM':
       let addNewItem = Object.assign({}, action.data,{
         id: +new Date,
@@ -94,17 +98,29 @@ export const previewSecondSlider = (state, action) => {
         return 'Purple'
       }
     default:
-      return state || 'Blue';
+      return state || 'Red';
   }
 };
 
 export const item = (state, action) => {
   switch (action.type) {
-    case 'RECEIVE_DATA':
-      return action.data.item || state;
+    case 'RECEIVE_STATE_DATA':
+      return action.data[0].item || state;
     case 'SELECT_ITEM':
       return Object.assign({}, state, {active: action.id})
     default:
       return state || {};
   }
 };
+
+// Reducers for Preview
+export const previewDrawer= (state, action) => {
+  switch (action.type) {
+    case 'PREVIEW_TOGGLE_DRAWER':
+      return true;
+    case 'PREVIEW_CLOSE_DRAWER':
+      return false;
+    default:
+      return !!state;
+  }
+}

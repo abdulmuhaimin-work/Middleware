@@ -5,9 +5,31 @@ import { Link, browserHistory } from 'react-router';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Toggle from 'material-ui/Toggle';
+//Validation
+import validator from 'validate.js'
+var validate = require("validate.js");
+
+var constraints={
+  name:{
+    presence:true,
+    length:{
+      maximum:35,
+      tooLong:"maximum 35 characters"
+    }
+  },
+  description:{
+    presence:true
+  }
+}
+
 // Styles
 const style = {
   margin: 3
+};
+
+const deleteStyle = {
+  paddingTop: 15,
+  textAlign: 'center'
 };
 
 const ItemModal = React.createClass({
@@ -17,7 +39,9 @@ const ItemModal = React.createClass({
         name: '',
         description: '',
         image: '',
-        featured: false
+        featured: false,
+        nameErrorText:'',
+        descriptionErrorText:''
     };
   },
 
@@ -48,25 +72,21 @@ const ItemModal = React.createClass({
   render(){
     let { item, state, deleteItem } = this.props;
     var index = state.resource.findIndex(c => c.id.toString() === item.itemId);
-    console.log(this.state.featured);
     return (
       <div className='modal'>
       { deleteItem ?
         <div>
           <h1> Delete Item </h1>
-          <TextField style={style} fullWidth={true} hintText={state.resource[index].name} disabled={true} />
-          <br />
-          <TextField style={style} fullWidth={true} hintText={state.resource[index].description} disabled={true} />
-          <div>
+          <div style={deleteStyle}>
             <Link to={`/content`}><RaisedButton label="YES" primary={true} onClick={this.onDelete} style={style} /></Link>
             <Link to={`/content/item/${item.itemId}`}><RaisedButton label="NO" style={style} /></Link>
           </div>
         </div> :
         <div>
-          <h1> Edit Item </h1>
-          <TextField style={style} fullWidth={true} value={this.state.name} onChange={this._handleNameFieldChange} floatingLabelText="Name" hintText={state.resource[index].name} />
+          <h1> Update Item </h1>
+          <TextField  errorText={this.state.nameErrorText} style={style} fullWidth={true} value={this.state.name} onChange={this._handleNameFieldChange} floatingLabelText="Name" hintText={state.resource[index].name} />
           <br />
-          <TextField style={style} fullWidth={true} value={this.state.description} onChange={this._handleDescriptionFieldChange} floatingLabelText="Description" hintText={state.resource[index].description} multiLine={true} />
+          <TextField errorText={this.state.descriptionErrorText} style={style} fullWidth={true} value={this.state.description} onChange={this._handleDescriptionFieldChange} floatingLabelText="Description" hintText={state.resource[index].description} multiLine={true} />
           <br />
           <TextField style={style} fullWidth={true} value={this.state.image} onChange={this._handleImageFieldChange} floatingLabelText="Image" hintText="Image URL" />
           <br />
@@ -75,7 +95,7 @@ const ItemModal = React.createClass({
           <br />
           <br />
           <div>
-            <Link to={`/content/item/${item.itemId}`}><RaisedButton label="SAVE" primary={true} onClick={this.onSave} style={style} /></Link>
+            <RaisedButton label="SAVE" primary={true} onClick={this.onSave} style={style} />
             <Link to={`/content/item/${item.itemId}`}><RaisedButton label="CANCEL" style={style} /></Link>
           </div>
         </div>
@@ -85,13 +105,21 @@ const ItemModal = React.createClass({
   },
 
   onSave(evt) {
-    this.props.updateItem(Object.assign({}, {
-      id: this.props.item.itemId,
-      name: this.state.name,
-      description: this.state.description,
-      image: this.state.image?this.state.image:'http://www.thebakerymadewithlove.com/wp-content/uploads/2014/08/placeholder.png',
-      featured: this.state.featured
-    }));
+    if (validate({name:this.state.name,description:this.state.description}, constraints)==undefined){
+      window.location=`#/content/item/${this.props.item.itemId}`;
+      this.props.updateItem(Object.assign({}, {
+        id: this.props.item.itemId,
+        name: this.state.name,
+        description: this.state.description,
+        image: this.state.image?this.state.image:'http://www.thebakerymadewithlove.com/wp-content/uploads/2014/08/placeholder.png',
+        featured: this.state.featured
+      }))
+    }
+    else
+    {
+      var itemToBeValidated=validate({name:this.state.name,description:this.state.description}, constraints);
+      this.setState({ nameErrorText: itemToBeValidated.name, descriptionErrorText: itemToBeValidated.description});
+    }
   },
 
   onDelete(evt) {

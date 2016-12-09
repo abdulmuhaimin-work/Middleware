@@ -165,7 +165,7 @@
 	function run() {
 	  var state = store.getState();
 	  //localStore.clear(state);
-	  console.log(state);
+	  //console.log(state);
 	  _reactDom2.default.render(_react2.default.createElement(
 	    _reactRedux.Provider,
 	    { store: store },
@@ -184,6 +184,7 @@
 	function save() {
 	  var state = store.getState();
 
+	  /*
 	  fetch('/api/data', {
 	    method: 'POST',
 	    headers: {
@@ -192,13 +193,15 @@
 	    },
 	    body: JSON.stringify({
 	      drawer: state.drawer,
-	      item: state.item,
+	      navigation: state.navigation,
 	      resource: state.resource,
-	      navigation: state.navigation
+	      item: state.item
 	    })
 	  });
+	  */
 
-	  fetch('http://0.0.0.0:3000/api/Drawers/replaceOrCreate', {
+	  // Saving to LoopBack
+	  fetch('http://0.0.0.0:3000/api/states/replaceOrCreate', {
 	    method: 'POST',
 	    headers: {
 	      Accept: 'application/json',
@@ -206,6 +209,9 @@
 	    },
 	    body: JSON.stringify({
 	      drawer: state.drawer,
+	      navigation: state.navigation,
+	      resource: state.resource,
+	      item: state.item,
 	      id: '0000'
 	    })
 	  });
@@ -29146,25 +29152,21 @@
 	  return { type: 'HANDLE_SECOND_PREVIEW_SLIDER', data: value };
 	};
 
-	var receiveData = exports.receiveData = function receiveData(data) {
-	  return { type: 'RECEIVE_DATA', data: data };
-	};
-	var receiveDrawerData = exports.receiveDrawerData = function receiveDrawerData(data) {
-	  return { type: 'RECEIVE_DRAWER_DATA', data: data };
+	//export const receiveData = data => ({ type: 'RECEIVE_DATA', data: data});
+	var receiveStateData = exports.receiveStateData = function receiveStateData(data) {
+	  return { type: 'RECEIVE_STATE_DATA', data: data };
 	};
 
 	var fetchData = exports.fetchData = function fetchData() {
 	  return function (dispatch) {
-	    fetch('/api/data').then(function (res) {
-	      return res.json();
-	    }).then(function (json) {
-	      return dispatch(receiveData(json));
-	    });
+	    //fetch('/api/data')
+	    //.then(res => res.json())
+	    //.then(json => dispatch(receiveData(json)));
 	    //.catch(err => dispatch(failedRequest(err)));
-	    fetch('http://0.0.0.0:3000/api/Drawers').then(function (res) {
+	    fetch('http://0.0.0.0:3000/api/states').then(function (res) {
 	      return res.json();
 	    }).then(function (json) {
-	      return dispatch(receiveDrawerData(json));
+	      return dispatch(receiveStateData(json));
 	    });
 	  };
 	};
@@ -29183,8 +29185,12 @@
 
 	var drawer = exports.drawer = function drawer(state, action) {
 	  switch (action.type) {
-	    case 'RECEIVE_DRAWER_DATA':
-	      return action.data[0].drawer || false;
+	    case 'RECEIVE_STATE_DATA':
+	      if (action.data[0].drawer === 'true') {
+	        return true;
+	      } else {
+	        return false;
+	      };
 	    case 'TOGGLE_DRAWER':
 	      return true;
 	    case 'CLOSE_DRAWER':
@@ -29196,8 +29202,8 @@
 
 	var navigation = exports.navigation = function navigation(state, action) {
 	  switch (action.type) {
-	    case 'RECEIVE_DATA':
-	      return action.data.navigation || state;
+	    case 'RECEIVE_STATE_DATA':
+	      return action.data[0].navigation || 'home';
 	    case 'HOME_NAVIGATION':
 	      return 'home';
 	    case 'CONTENT_NAVIGATION':
@@ -29212,9 +29218,9 @@
 	var resource = exports.resource = function resource(state, action) {
 	  var _ret = function () {
 	    switch (action.type) {
-	      case 'RECEIVE_DATA':
+	      case 'RECEIVE_STATE_DATA':
 	        return {
-	          v: action.data.resource || state
+	          v: action.data[0].resource || state
 	        };
 	      case 'ADD_ITEM':
 	        var addNewItem = Object.assign({}, action.data, {
@@ -29299,8 +29305,8 @@
 
 	var item = exports.item = function item(state, action) {
 	  switch (action.type) {
-	    case 'RECEIVE_DATA':
-	      return action.data.item || state;
+	    case 'RECEIVE_STATE_DATA':
+	      return action.data[0].item || state;
 	    case 'SELECT_ITEM':
 	      return Object.assign({}, state, { active: action.id });
 	    default:
@@ -70780,7 +70786,6 @@
 	    var index = state.resource.findIndex(function (c) {
 	      return c.id.toString() === item.itemId;
 	    });
-	    console.log(this.state.featured);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'modal' },
@@ -73853,7 +73858,6 @@
 
 	  render: function render() {
 	    var props = this.props;
-	    console.log(props.screen);
 	    return _react2.default.createElement(
 	      _reactNative.View,
 	      { style: _stylePV2.default.previewEditorBox },

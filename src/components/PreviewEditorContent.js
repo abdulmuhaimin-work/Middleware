@@ -38,7 +38,6 @@ const Preview = React.createClass({
 
   render() {
     let props = this.props;
-    console.log(props.screen)
     return (
       <View style={styles.previewEditorBox}>
         <View style={styles.previewEditorWrapper}>

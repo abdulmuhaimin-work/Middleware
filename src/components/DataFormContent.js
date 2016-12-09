@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, ScrollView, Image } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 // Material UI
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
@@ -35,15 +35,21 @@ const template = {
             {
               "columnId": 1,
               "field": "name"
-            },
-            {
-              "columnId": 2,
-              "field": "description"
             }
           ]
         },
         {
           "rowId": 3,
+          "columns":
+          [
+            {
+              "columnId": 1,
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "rowId": 4,
           "columns":
           [
             {
@@ -153,6 +159,9 @@ const DataFormContent = ({ selectedItem, itemId, children}) => {
               </View>
             </View>
           </View>
+          <View style={styles.dataFormGroupRowBorder}>
+            <Divider />
+          </View>
         </View>
       )
     } else {
@@ -161,9 +170,9 @@ const DataFormContent = ({ selectedItem, itemId, children}) => {
           <View style={styles.dataFormGroupColWrapper}>
             <View style={styles.dataFormGroupLabelBox}>
               <View style={styles.dataFormGroupLabelWrapper}>
-                <View style={styles.label}>
+                <Text style={styles.dataFormGroupLabel}>
                   {field[0].label}
-                </View>
+                </Text>
               </View>
             </View>
             <View style={styles.dataFormGroupFieldBox}>

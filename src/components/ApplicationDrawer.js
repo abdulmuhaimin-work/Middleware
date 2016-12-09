@@ -32,7 +32,7 @@ const ApplicationDrawer = React.createClass({
         <Link to={`/`} onClick={()=>{props.homeNavigation(),props.handleToggle()}}><MenuItem>Home</MenuItem></Link>
         <Link to={`/content`} onClick={()=>{props.contentNavigation(),props.handleToggle()}}><MenuItem>Content</MenuItem></Link>
         <Link to={`/preview`} onClick={()=>{props.previewNavigation(),props.handleToggle()}}><MenuItem>Preview</MenuItem></Link>
-        </Drawer>
+      </Drawer>
     );
   }
 });
