@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { previewToggleDrawer } from '../actions';
+import { Link } from 'react-router';
 // Material UI
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -16,7 +17,6 @@ function capitalizeFirstLetter(string) {
 }
 
 const mapStateToProps = (state) => ({
-  navigation: state.navigation,
   theme: state.previewSecondSlider
 })
 
@@ -32,9 +32,7 @@ const PreviewApplicationBar = React.createClass({
     return(
     <MuiThemeProvider muiTheme={getTheme(theme)}>
       <AppBar
-        title={capitalizeFirstLetter(props.navigation)}
         onLeftIconButtonTouchTap={()=>{props.handleToggle()}}
-        showMenuIconButton={false}
       />
     </MuiThemeProvider>);
   }

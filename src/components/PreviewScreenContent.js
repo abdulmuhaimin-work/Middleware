@@ -14,15 +14,16 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import styles from '../stylePV';
 // Components
 import PreviewApplicationBar from './PreviewApplicationBar';
-import PreviewDataListAll from './PreviewDataListAll';
+import PreviewApplicationMenu from './PreviewApplicationMenu';
 
 const mapStateToProps = (state) => ({
   screen: state.previewFirstSlider,
   theme: state.previewSecondSlider,
   featured: state.resource.filter(c => c.featured == true),
+  drawer: state.previewDrawer
 });
 
-let Preview = ({ screen, theme, featured, children }) => {
+let Preview = ({ screen, theme, featured, drawer, children }) => {
 
   var _scrollView: ScrollView;
 
@@ -42,6 +43,13 @@ let Preview = ({ screen, theme, featured, children }) => {
         scrollEventThrottle={100} horizontal={false}>
           <View style={getScreen(screen)}>
             <PreviewApplicationBar/>
+            <div>
+              { drawer ?
+                <div>
+                  <PreviewApplicationMenu />
+                </div> : <div></div>
+              }
+            </div>
             <View style={styles.previewScreenFeaturedImageBox}>
               <View style = {styles.previewScreenFeaturedImageWrapper}>
                 <ScrollView ref={(scrollView) => { _scrollView = scrollView; }}
@@ -53,8 +61,8 @@ let Preview = ({ screen, theme, featured, children }) => {
             <View style={styles.previewScreenGroupRowBox}>
               <View style = {styles.previewScreenGroupRowWrapper}>
                 <Tabs>
-                  <Link to={`/preview/all`}><Tab label="All"/></Link>
-                  <Link to={`/preview/featured`}><Tab label="Featured"/></Link>
+                  <Tab label="All" onActive={()=>{window.location=`#/preview/all`}}/>
+                  <Tab label="Featured" onActive={()=>{window.location=`#/preview/featured`}}/>
                 </Tabs>
                 {children}
               </View>

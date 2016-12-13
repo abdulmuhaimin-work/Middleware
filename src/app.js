@@ -22,8 +22,8 @@ import UpdateItemModal from './components/UpdateItemModal';
 import DeleteItemModal from './components/DeleteItemModal';
 import Content from './components/Content';
 import Preview from './components/Preview';
-import PreviewDataListAll from './components/PreviewDataListAll';
-import PreviewDataListFeatured from './components/PreviewDataListFeatured';
+import PreviewApplicationDataListAll from './components/PreviewApplicationDataListAll';
+import PreviewApplicationDataListFeatured from './components/PreviewApplicationDataListFeatured';
 
 // Simulate Tapping
 injectTapEventPlugin();
@@ -39,8 +39,8 @@ const routes = (
       </Route>
     </Route>
     <Route path='/preview' component={Preview}>
-      <Route path='/preview/all' component={PreviewDataListAll} />
-      <Route path='/preview/featured' component={PreviewDataListFeatured} />
+      <Route path='/preview/all' component={PreviewApplicationDataListAll} />
+      <Route path='/preview/featured' component={PreviewApplicationDataListFeatured} />
     </Route>
   </Route>
 );

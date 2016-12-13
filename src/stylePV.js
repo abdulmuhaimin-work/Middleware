@@ -66,7 +66,7 @@ var styles = StyleSheet.create({
     position: 'relative',
     flexGrow: 1,
     borderLeftWidth: 1,
-    backgroundColor: 'grey'
+    backgroundColor: 'black'
   },
 
   previewScreenWrapper: {
@@ -76,6 +76,18 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     margin: 10
+  },
+
+  previewScreenFeaturedImageBox: {
+    position: 'relative'
+  },
+
+  previewScreenFeaturedImageWrapper: {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'lightgrey'
   },
 
   previewFeaturedImage: {
