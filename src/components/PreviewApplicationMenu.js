@@ -13,10 +13,10 @@ const mapDispatchToProps = dispatch => ({
   handleToggle: () => dispatch(previewCloseDrawer())
 });
 
-const PreviewMenu = React.createClass({
+const PreviewApplicationMenu = React.createClass({
   render(){
     return (
-      <div className='modal'>
+      <div className='modalPreview'>
         <List>
           <ListItem primaryText="Home"/>
         </List>
@@ -30,4 +30,4 @@ const PreviewMenu = React.createClass({
 }
 )
 
-export default connect(mapStateToProps,mapDispatchToProps)(PreviewMenu);
+export default connect(mapStateToProps,mapDispatchToProps)(PreviewApplicationMenu);

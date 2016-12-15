@@ -32,7 +32,7 @@ const ApplicationBar = React.createClass({
     <AppBar
       title={title}
       onLeftIconButtonTouchTap={()=>{props.handleToggle()}}
-      iconElementRight={<Link to={`/preview/all`} onClick={()=>{props.previewNavigation()}}><IconButton iconClassName="material-icons">visibility</IconButton></Link>}
+      iconElementRight={<Link to={`/preview/main/all`} onClick={()=>{props.previewNavigation()}}><IconButton iconClassName="material-icons">visibility</IconButton></Link>}
     />);
   }
 });

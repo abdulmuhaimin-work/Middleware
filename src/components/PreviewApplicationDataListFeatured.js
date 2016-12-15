@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const PreviewDataListAll = React.createClass({
+const PreviewApplicationDataListFeatured = React.createClass({
   render() {
   let featured = this.props.featured;
   var _scrollView: ScrollView;
@@ -51,4 +51,4 @@ const PreviewDataListAll = React.createClass({
 });
 
 
-export default connect(mapStateToProps)(PreviewDataListAll);
+export default connect(mapStateToProps)(PreviewApplicationDataListFeatured);

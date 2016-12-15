@@ -171,6 +171,13 @@ body {
   z-index: 2;
 }
 
+.modalPreview {
+  left: 0px;
+  right: 0px;
+  background: #ffffff;
+  padding: 15px;
+}
+
 .search {
   float:right;
   box-sizing: border-box;

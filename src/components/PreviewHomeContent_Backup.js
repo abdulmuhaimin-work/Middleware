@@ -23,7 +23,7 @@ const mapStateToProps = (state) => ({
   drawer: state.previewDrawer
 });
 
-let Preview = ({ screen, theme, featured, drawer, children }) => {
+let PreviewHomeContent = ({ screen, theme, featured, drawer, children }) => {
 
   var _scrollView: ScrollView;
 
@@ -61,8 +61,8 @@ let Preview = ({ screen, theme, featured, drawer, children }) => {
             <View style={styles.previewScreenGroupRowBox}>
               <View style = {styles.previewScreenGroupRowWrapper}>
                 <Tabs>
-                  <Tab label="All" onActive={()=>{window.location=`#/preview/all`}}/>
-                  <Tab label="Featured" onActive={()=>{window.location=`#/preview/featured`}}/>
+                  <Tab label="All" onActive={()=>{window.location=`#/preview/main/all`}}/>
+                  <Tab label="Featured" onActive={()=>{window.location=`#/preview/main/featured`}}/>
                 </Tabs>
                 {children}
               </View>
@@ -93,4 +93,4 @@ function getTheme(theme) {
   } else { return getMuiTheme(purpleBaseTheme) }
 }
 
-export default connect(mapStateToProps)(Preview);
+export default connect(mapStateToProps)(PreviewHomeContent);

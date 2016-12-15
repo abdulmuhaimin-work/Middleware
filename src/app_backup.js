@@ -24,8 +24,7 @@ import Content from './components/Content';
 import Preview from './components/Preview';
 import PreviewApplicationDataListAll from './components/PreviewApplicationDataListAll';
 import PreviewApplicationDataListFeatured from './components/PreviewApplicationDataListFeatured';
-import PreviewHomeContent from './components/PreviewHomeContent';
-import PreviewItemContent from './components/PreviewItemContent';
+
 // Simulate Tapping
 injectTapEventPlugin();
 
@@ -40,11 +39,8 @@ const routes = (
       </Route>
     </Route>
     <Route path='/preview' component={Preview}>
-      <Route path='/preview/main' component={PreviewHomeContent}>
-        <Route path='/preview/main/all' component={PreviewApplicationDataListAll} />
-        <Route path='/preview/main/featured' component={PreviewApplicationDataListFeatured} />
-      </Route>
-      <Route path='/preview/item' component={PreviewItemContent} />
+      <Route path='/preview/all' component={PreviewApplicationDataListAll} />
+      <Route path='/preview/featured' component={PreviewApplicationDataListFeatured} />
     </Route>
   </Route>
 );

@@ -66,7 +66,7 @@ var styles = StyleSheet.create({
     position: 'relative',
     flexGrow: 1,
     borderLeftWidth: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'grey'
   },
 
   previewScreenWrapper: {
@@ -113,7 +113,8 @@ var styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
+    //borderWidth: 1,
   },
 
   previewScreenListBox: {
@@ -158,17 +159,28 @@ var styles = StyleSheet.create({
     right: 0
   },
 
+  previewScreenLayoutBox: {
+    position: 'relative',
+    flexGrow: 1
+  },
+
+  previewScreenLayoutWrapper: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+
   iPhone5: {
     width: 320,
     height: 568,
-    justifyContent: 'center',
     backgroundColor: 'white'
   },
 
   iPhone6: {
     width: 414,
     height: 736,
-    justifyContent: 'center',
     backgroundColor: 'white'
   },
 

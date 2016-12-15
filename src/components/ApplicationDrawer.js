@@ -31,7 +31,7 @@ const ApplicationDrawer = React.createClass({
         <AppBar title="Menu" showMenuIconButton={false}/>
         <Link to={`/`} onClick={()=>{props.homeNavigation(),props.handleToggle()}}><MenuItem>Home</MenuItem></Link>
         <Link to={`/content`} onClick={()=>{props.contentNavigation(),props.handleToggle()}}><MenuItem>Content</MenuItem></Link>
-        <Link to={`/preview/all`} onClick={()=>{props.previewNavigation(),props.handleToggle()}}><MenuItem>Preview</MenuItem></Link>
+        <Link to={`/preview/main/all`} onClick={()=>{props.previewNavigation(),props.handleToggle()}}><MenuItem>Preview</MenuItem></Link>
       </Drawer>
     );
   }
