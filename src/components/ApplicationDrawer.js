@@ -6,6 +6,9 @@ import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
+import IconButton from 'material-ui/IconButton';
+import NavigationAdd from 'material-ui/svg-icons/content/add-circle-outline';
+import FlatButton from 'material-ui/FlatButton';
 
 const mapStateToProps = ({ drawer }) => ({
     drawer
@@ -21,17 +24,23 @@ const mapDispatchToProps = dispatch => ({
 const ApplicationDrawer = React.createClass({
   render() {
     let props = this.props;
+    let title = (
+        <span className="appLabel">
+          Add New Item
+        </span>
+    );
+
     return (
       <Drawer
         docked={false}
-        width={200}
+        width={300}
         open={props.drawer}
         onRequestChange={()=>{props.handleToggle()}}
       >
-        <AppBar title="Menu" showMenuIconButton={false}/>
-        <Link to={`/`} style={{ textDecoration: 'none' }} onClick={()=>{props.homeNavigation(),props.handleToggle()}}><MenuItem>Home</MenuItem></Link>
-        <Link to={`/content`} style={{ textDecoration: 'none' }} onClick={()=>{props.contentNavigation(),props.handleToggle()}}><MenuItem>Content</MenuItem></Link>
-        <Link to={`/preview/main/all`} style={{ textDecoration: 'none' }} onClick={()=>{props.previewNavigation(),props.handleToggle()}}><MenuItem>Preview</MenuItem></Link>
+        <AppBar title={title}
+          iconElementLeft={<IconButton><NavigationAdd /></IconButton>}
+        />
+        <Link to={`/content`} style={{ textDecoration: 'none' }} onClick={()=>{props.contentNavigation(),props.handleToggle()}}><MenuItem>Product</MenuItem></Link>
       </Drawer>
     );
   }

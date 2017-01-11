@@ -73,34 +73,15 @@ function run() {
 function save() {
   var state = store.getState();
 
-  /*
-  fetch('/api/data', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      drawer: state.drawer,
-      navigation: state.navigation,
-      resource: state.resource,
-      item: state.item
-    })
-  });
-  */
-
   // Saving to LoopBack
-  fetch('http://0.0.0.0:3000/api/states/replaceOrCreate', {
+  fetch('http://0.0.0.0:3000/api/products/replaceOrCreate', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      drawer: state.drawer,
-      navigation: state.navigation,
-      resource: state.resource,
-      item: state.item,
+      items: state.resource,
       id: '0000'
     })
   });
@@ -114,15 +95,3 @@ function init () {
 }
 
 init();
-/*
-run();
-store.subscribe(run);
-
-store.dispatch({
-  type: 'ADD_ITEM',
-  data: {
-    name: 'give feed',
-    description: 'hurry fruit claws center please ',
-    image: 'https://4.bp.blogspot.com/-tilGNle9Pj4/V6F4u_o3b6I/AAAAAAAAGiM/7wjrJ2ucN8gzTloL-ik8GYrmpy7GNjQUwCLcB/s1600/010816%2Bawayfromtheblue%2Brebecca%2Bminkoff%2Bred%2Bsaddle%2Bbag%2Bprinted%2Bskinny%2Bjeans%2Bcooper.jpg'
-  }
-});*/

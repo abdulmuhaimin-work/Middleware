@@ -26,7 +26,7 @@ export const fetchData = () => {
       //.then(res => res.json())
       //.then(json => dispatch(receiveData(json)));
       //.catch(err => dispatch(failedRequest(err)));
-    fetch('http://0.0.0.0:3000/api/states')
+    fetch('http://0.0.0.0:3000/api/products')
       .then(res => res.json())
       .then(json => dispatch(receiveStateData(json)))
   };

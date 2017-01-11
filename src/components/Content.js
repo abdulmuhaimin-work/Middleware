@@ -17,10 +17,10 @@ let Content = ({ itemId, children }) => {
     <View style={styles.applicationContentBox}>
       <View style={styles.applicationContentWrapper}>
         <DataList/>
-          { itemId ?
-            <DataForm itemId={itemId} children={children} />
-            : <DataFormGuide />
-          }
+        { itemId ?
+          <DataForm itemId={itemId} children={children} />
+          : <DataFormGuide />
+        }
       </View>
     </View>
   )

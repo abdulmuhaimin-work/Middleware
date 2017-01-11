@@ -4,6 +4,15 @@ import {StyleSheet} from 'react-native';
 
 var styles = StyleSheet.create({
 
+  previewSplashContentBox: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    //flexGrow: 1
+  },
+
   previewContentBox: {
     position: 'relative',
     flexGrow: 1
@@ -15,7 +24,7 @@ var styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
 
   previewEditorBox: {
@@ -68,6 +77,18 @@ var styles = StyleSheet.create({
     borderLeftWidth: 1,
     backgroundColor: 'grey'
   },
+
+      /*
+        .modalSplash {
+          left: 0px;
+          right: 0px;
+          background:#f6f6f6;
+          box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.15), 0 -0.5px 0 rgba(0, 0, 0, 0.15), 0.5px 0 0 rgba(0, 0, 0, 0.15), -0.5px 0 0 rgba(0, 0, 0, 0.15), 0 4px 7px rgba(0,0,0,0.15), 0px 0px 0px 2000px rgba(0,0,0,0.2);
+          border-radius: 1px;
+          padding: 20px;
+          z-index: 2;
+        }
+      */
 
   previewScreenWrapper: {
     position: 'absolute',
